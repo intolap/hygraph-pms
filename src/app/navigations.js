@@ -1,6 +1,11 @@
 export const navigations = [
   { name: 'Dashboard', path: '/dashboard/', icon: 'dashboard' },
-  { label: 'PAGES', type: 'label' },
+  { name: 'Projects', path: '/projects/', icon: 'assignment' },
+
+  { name: 'Tasks', path: '/tasks/fcjhb', icon: 'view_list' },
+
+  { name: 'Task Detail', path: '/task-detail/gfchvhb', icon: 'check_circle' },
+
   {
     name: 'Session/Auth',
     icon: 'security',
@@ -11,7 +16,7 @@ export const navigations = [
       { name: 'Error', iconText: '404', path: '/session/404' }
     ]
   },
-  { label: 'Components', type: 'label' },
+  { label: 'Reports', type: 'label' },
   {
     name: 'Components',
     icon: 'favorite',

@@ -18,6 +18,17 @@ const AppEchart = Loadable(lazy(() => import('app/views/charts/echarts/AppEchart
 // dashboard page
 const Analytics = Loadable(lazy(() => import('app/views/dashboard/Analytics')));
 
+
+// projects page
+const Projects = Loadable(lazy(() => import('app/views/dashboard/projects/Projects')));
+
+// tasks page
+const Tasks = Loadable(lazy(() => import('app/views/dashboard/tasks/Tasks')));
+
+// tasks page
+const TaskDetail = Loadable(lazy(() => import('app/views/dashboard/task-detail/TaskDetail')));
+
+
 const routes = [
   {
     element: (
@@ -31,6 +42,27 @@ const routes = [
       {
         path: '/dashboard/',
         element: <Analytics />,
+        auth: authRoles.admin
+      },
+
+      // projects route
+      {
+        path: '/projects/',
+        element: <Projects />,
+        auth: authRoles.admin
+      },
+
+      // tasks route
+      {
+        path: '/tasks/:projectid',
+        element: <Tasks />,
+        auth: authRoles.admin
+      },
+
+      // tasks route
+      {
+        path: '/task-detail/:taskid',
+        element: <TaskDetail />,
         auth: authRoles.admin
       },
 
