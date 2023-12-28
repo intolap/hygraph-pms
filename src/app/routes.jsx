@@ -29,7 +29,7 @@ const routes = [
       ...materialRoutes,
       // dashboard route
       {
-        path: '/dashboard/default',
+        path: '/dashboard/',
         element: <Analytics />,
         auth: authRoles.admin
       },
@@ -49,8 +49,10 @@ const routes = [
   { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
 
-  { path: '/', element: <Navigate to="dashboard/default" /> },
+  { path: '/', element: <Navigate to="dashboard/" /> },
   { path: '*', element: <NotFound /> }
+
+
 ];
 
 export default routes;
