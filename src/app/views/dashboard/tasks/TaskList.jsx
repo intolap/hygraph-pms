@@ -107,11 +107,9 @@ const TaskList = () => {
         <TableHead>
           <TableRow>
             <TableCell align="left">Name</TableCell>
-            <TableCell align="center">Company</TableCell>
-            <TableCell align="center">Start Date</TableCell>
-            <TableCell align="center">Status</TableCell>
-            <TableCell align="center">Amount</TableCell>
-            <TableCell align="right">Action</TableCell>
+            <TableCell align="left">Due Date</TableCell>
+            <TableCell align="left">Status</TableCell>
+            <TableCell align="left">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -120,11 +118,9 @@ const TaskList = () => {
             .map((subscriber, index) => (
               <TableRow key={index}>
                 <TableCell align="left">{subscriber.name}</TableCell>
-                <TableCell align="center">{subscriber.company}</TableCell>
-                <TableCell align="center">{subscriber.date}</TableCell>
-                <TableCell align="center">{subscriber.status}</TableCell>
-                <TableCell align="center">${subscriber.amount}</TableCell>
-                <TableCell align="right">
+                <TableCell align="left">{subscriber.date}</TableCell>
+                <TableCell align="left">{subscriber.status}</TableCell>
+                <TableCell align="left">
                   <IconButton>
                     <Icon color="error">close</Icon>
                   </IconButton>

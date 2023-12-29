@@ -1,152 +1,147 @@
 import {
-  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  Grid,
   Icon,
-  IconButton,
-  styled,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
+  Radio,
+  RadioGroup,
+  TextField,
+  Autocomplete,
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
+  ListItemText,
+  Select,
+  Checkbox
 } from "@mui/material";
-import { useState } from "react";
-
-const StyledTable = styled(Table)(() => ({
-  whiteSpace: "pre",
-  "& thead": {
-    "& tr": { "& th": { paddingLeft: 0, paddingRight: 0 } },
-  },
-  "& tbody": {
-    "& tr": { "& td": { paddingLeft: 0, textTransform: "capitalize" } },
-  },
-}));
-
-const subscribarList = [
-  {
-    name: "john doe",
-    date: "18 january, 2019",
-    amount: 1000,
-    status: "close",
-    company: "ABC Fintech LTD.",
-  },
-  {
-    name: "kessy bryan",
-    date: "10 january, 2019",
-    amount: 9000,
-    status: "open",
-    company: "My Fintech LTD.",
-  },
-  {
-    name: "kessy bryan",
-    date: "10 january, 2019",
-    amount: 9000,
-    status: "open",
-    company: "My Fintech LTD.",
-  },
-  {
-    name: "james cassegne",
-    date: "8 january, 2019",
-    amount: 5000,
-    status: "close",
-    company: "Collboy Tech LTD.",
-  },
-  {
-    name: "lucy brown",
-    date: "1 january, 2019",
-    amount: 89000,
-    status: "open",
-    company: "ABC Fintech LTD.",
-  },
-  {
-    name: "lucy brown",
-    date: "1 january, 2019",
-    amount: 89000,
-    status: "open",
-    company: "ABC Fintech LTD.",
-  },
-  {
-    name: "lucy brown",
-    date: "1 january, 2019",
-    amount: 89000,
-    status: "open",
-    company: "ABC Fintech LTD.",
-  },
-  {
-    name: "lucy brown",
-    date: "1 january, 2019",
-    amount: 89000,
-    status: "open",
-    company: "ABC Fintech LTD.",
-  },
-  {
-    name: "lucy brown",
-    date: "1 january, 2019",
-    amount: 89000,
-    status: "open",
-    company: "ABC Fintech LTD.",
-  },
-];
+import { Span, H4 } from "app/components/Typography";
+import { useEffect, useState } from "react";
+import { ValidatorForm } from "react-material-ui-form-validator";
+import TaskComments from "./TaskComments";
 
 const TaskSingle = () => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [state, setState] = useState({ date: new Date() });
 
-  const handleChangePage = (_, newPage) => {
-    setPage(newPage);
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const names = [
+    'Open',
+    'InProgress',
+    'Complete',
+    'Closed'
+  ];
+
+  const [personName, setPersonName] = useState([]);
+
+  const handleSelectChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  const handleSubmit = (event) => {
+    // console.log("submitted");
+    // console.log(event);
+  };
+
+  const handleChange = (event) => {
+    event.persist();
+    setState({ ...state, [event.target.name]: event.target.value });
+  };
+
+  const {
+    taskName,
+    taskDescription,
+    gender,
+  } = state;
+
+  const textField = {
+    width: '100%',
+    marginBottom: '15px'
   };
 
   return (
-    <Box width="100%" overflow="auto">
-      <StyledTable>
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="center">Company</TableCell>
-            <TableCell align="center">Start Date</TableCell>
-            <TableCell align="center">Status</TableCell>
-            <TableCell align="center">Amount</TableCell>
-            <TableCell align="right">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {subscribarList
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((subscriber, index) => (
-              <TableRow key={index}>
-                <TableCell align="left">{subscriber.name}</TableCell>
-                <TableCell align="center">{subscriber.company}</TableCell>
-                <TableCell align="center">{subscriber.date}</TableCell>
-                <TableCell align="center">{subscriber.status}</TableCell>
-                <TableCell align="center">${subscriber.amount}</TableCell>
-                <TableCell align="right">
-                  <IconButton>
-                    <Icon color="error">close</Icon>
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </StyledTable>
+    <div>
+      <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
+        <Grid container spacing={6}>
+          <Grid item lg={8} md={8} sm={12} xs={12} sx={{ mt: 2 }}>
+            <TextField
+              type="text"
+              name="taskName"
+              placeholder="Task Name"
+              onChange={handleChange}
+              value={taskName || ""}
+              validators={["required"]}
+              errorMessages={["this field is required"]}
+              style={textField}
+            />
 
-      <TablePagination
-        sx={{ px: 2 }}
-        page={page}
-        component="div"
-        rowsPerPage={rowsPerPage}
-        count={subscribarList.length}
-        onPageChange={handleChangePage}
-        rowsPerPageOptions={[5, 10, 25]}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        nextIconButtonProps={{ "aria-label": "Next Page" }}
-        backIconButtonProps={{ "aria-label": "Previous Page" }}
-      />
-    </Box>
+            <TextField
+              type="text"
+              name="taskDescription"
+              placeholder="Task Description"
+              onChange={handleChange}
+              value={taskDescription || ""}
+              validators={["required"]}
+              errorMessages={["this field is required"]}
+              style={textField}
+            />
+
+            <Button color="primary" variant="contained" type="submit">
+              {/* <Icon>send</Icon> */}
+              <Span sx={{ textTransform: "capitalize" }}>Save</Span>
+            </Button>
+
+            <Button color="secondary" variant="contained" type="reset">
+              <Icon>close</Icon>
+            </Button>
+
+            <H4 sx={{ textTransform: "capitalize", marginTop: "30px", marginBottom: "30px" }}>All comments</H4>
+
+            <TaskComments />
+          </Grid>
+
+          <Grid item lg={4} md={4} sm={12} xs={12} sx={{ mt: 2 }}>
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="demo-multiple-checkbox-label">Status</InputLabel>
+              <Select
+                // labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={personName}
+                onChange={handleSelectChange}
+                // input={<OutlinedInput label="Tag" />}
+                renderValue={(selected) => selected.join(', ')}
+              // MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={personName.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+
+
+      </ValidatorForm>
+    </div>
   );
 };
 

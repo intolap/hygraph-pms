@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/material";
+import { Box, Card, styled } from "@mui/material";
 import { Breadcrumb, SimpleCard } from "app/components";
 import TaskSingle from "./TaskSingle";
 
