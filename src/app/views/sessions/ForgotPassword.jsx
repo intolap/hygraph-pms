@@ -39,11 +39,12 @@ const ForgotPassword = () => {
       <Card className="card">
         <Grid container>
           <Grid item xs={12}>
-            <JustifyBox p={4}>
+            {/* <JustifyBox p={4}>
               <img width="300" src="/assets/images/illustrations/dreamer.svg" alt="" />
-            </JustifyBox>
+            </JustifyBox> */}
 
             <ContentBox>
+              <h1 style={{ width: '100%', textAlign: 'center' }}>Forgot Password</h1>
               <form onSubmit={handleFormSubmit}>
                 <TextField
                   type="email"

@@ -68,14 +68,15 @@ const JwtLogin = () => {
     <JWTRoot>
       <Card className="card">
         <Grid container>
-          <Grid item sm={6} xs={12}>
+          {/* <Grid item sm={6} xs={12}>
             <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>
               <img src="/assets/images/illustrations/dreamer.svg" width="100%" alt="" />
             </JustifyBox>
-          </Grid>
+          </Grid> */}
 
-          <Grid item sm={6} xs={12}>
+          <Grid item sm={12} xs={12}>
             <ContentBox>
+              <h1 style={{ width: '100%', textAlign: 'center' }}>Signin</h1>
               <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
@@ -144,7 +145,7 @@ const JwtLogin = () => {
                       Login
                     </LoadingButton>
 
-                    <Paragraph>
+                    {/* <Paragraph>
                       Don't have an account?
                       <NavLink
                         to="/session/signup"
@@ -152,7 +153,7 @@ const JwtLogin = () => {
                       >
                         Register
                       </NavLink>
-                    </Paragraph>
+                    </Paragraph> */}
                   </form>
                 )}
               </Formik>
