@@ -2,21 +2,21 @@ export const navigations = [
   { name: 'Dashboard', path: '/dashboard/', icon: 'dashboard' },
   { name: 'Projects', path: '/projects/', icon: 'assignment' },
 
-  { name: 'Tasks', path: '/tasks/fcjhb', icon: 'view_list' },
+  { name: 'Tasks', path: '/tasks/:projectid', icon: 'view_list' },
 
-  { name: 'Task Detail', path: '/task-detail/gfchvhb', icon: 'check_circle' },
+  { name: 'Task Detail', path: '/task-detail/:taskid', icon: 'check_circle' },
 
-  {
+  /* {
     name: 'Session/Auth',
     icon: 'security',
     children: [
       { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
       // { name: 'Sign up', iconText: 'SU', path: '/session/signup' },
       { name: 'Forgot Password', iconText: 'FP', path: '/session/forgot-password' },
-      { name: 'Reset Password', iconText: 'FP', path: '/session/reset-password/abcd' },
+      { name: 'Reset Password', iconText: 'FP', path: '/session/reset-password/:token' },
       { name: 'Error', iconText: '404', path: '/session/404' }
     ]
-  },
+  }, */
   { label: 'Reports', type: 'label' },
   {
     name: 'Components',

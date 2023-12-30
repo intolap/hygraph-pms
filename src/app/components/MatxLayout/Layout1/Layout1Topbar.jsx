@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
@@ -22,6 +22,10 @@ import { topBarHeight } from 'app/utils/constant';
 import { Span } from '../../Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
 import ShoppingCart from '../../ShoppingCart';
+
+import { CLIENT_URL } from '../../../../config/keys'
+import { useDispatch, useSelector } from "react-redux";
+import { LoginAuthor, LogoutAuthor, ResetPassword, UpdateAuthor } from "../../../../store/actions/authorAction"
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary
@@ -83,9 +87,12 @@ const IconBox = styled('div')(({ theme }) => ({
 
 const Layout1Topbar = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const { settings, updateSettings } = useSettings();
-  const { logout, user } = useAuth();
+  // const { logout, user } = useAuth();
   const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const { error, successMessage, authenticate, token, rtoken, cAdminData, CurUser, myInfo, logoutSuccess, logoutError } = useSelector((state) => state.Authors)
 
   const updateSidebarMode = (sidebarSettings) => {
     updateSettings({ layout1Settings: { leftSidebar: { ...sidebarSettings } } });
@@ -101,6 +108,24 @@ const Layout1Topbar = () => {
     }
     updateSidebarMode({ mode });
   };
+
+  const UserLogout = () => {
+    // dispatch(LogoutAuthor());
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  /* if (localStorage.getItem('authToken') == null) {
+    window.location.href = `${CLIENT_URL}`
+  } */
+
+  useEffect(() => {
+    if (logoutSuccess || logoutError) {
+      localStorage.clear();
+      window.location.reload();
+      window.location.href = `${CLIENT_URL}/dashboard/`
+    }
+  }, [logoutSuccess, logoutError]);
 
   return (
     <TopbarRoot>
@@ -139,10 +164,10 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    Hi <strong>{user.name}</strong>
+                    {/* Hi <strong>{user.name}</strong> */}
                   </Span>
                 </Hidden>
-                <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />
+                {/* <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} /> */}
               </UserMenu>
             }
           >
@@ -165,7 +190,7 @@ const Layout1Topbar = () => {
               <Span> Settings </Span>
             </StyledItem> */}
 
-            <StyledItem onClick={logout}>
+            <StyledItem onClick={UserLogout}>
               <Icon> power_settings_new </Icon>
               <Span> Logout </Span>
             </StyledItem>

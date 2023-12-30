@@ -33,9 +33,9 @@ const TaskDetail = Loadable(lazy(() => import('app/views/task-detail/TaskDetail'
 const routes = [
   {
     element: (
-      <AuthGuard>
-        <MatxLayout />
-      </AuthGuard>
+      // <AuthGuard>
+      <MatxLayout />
+      // </AuthGuard>
     ),
     children: [
       ...materialRoutes,
@@ -81,7 +81,7 @@ const routes = [
   { path: '/session/signin', element: <JwtLogin /> },
   // { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
-  { path: '/session/reset-password/abcd', element: <ResetPassword /> },
+  { path: '/session/reset-password/:token', element: <ResetPassword /> },
 
   { path: '/', element: <Navigate to="dashboard/" /> },
   { path: '*', element: <NotFound /> }

@@ -4,9 +4,18 @@ import { Box, styled, useTheme } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { LoginAuthor } from "../../../store/actions/authorAction"
+import { SUCCESS_MESSAGE_CLEAR, ERROR_CLEAR } from "../../../store/types/authorTypes"
+
+import { CLIENT_URL } from '../../../config/keys'
+
+import Swal from 'sweetalert2'
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -51,18 +60,50 @@ const JwtLogin = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { error, successMessage, authenticate, token, myInfo } = useSelector((state) => state.Authors)
+  // const { login } = useAuth();
 
-  const { login } = useAuth();
+  const dispatch = useDispatch()
 
   const handleFormSubmit = async (values) => {
     setLoading(true);
-    try {
-      await login(values.email, values.password);
-      navigate('/');
-    } catch (e) {
-      setLoading(false);
-    }
+
+    dispatch(LoginAuthor({ email: values.email, password: values.password }))
+
+    // try {
+    //   await login(values.email, values.password);
+    //   navigate('/');
+    // } catch (e) {
+    //   setLoading(false);
+    // }
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      dispatch({ type: SUCCESS_MESSAGE_CLEAR })
+      setLoading(false);
+      if (authenticate) {
+        window.location.href = `${CLIENT_URL}/dashboard/`
+      }
+    }
+
+    if (error) {
+      Swal.fire({
+        // icon: 'error',
+        // title: 'Oops...',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        text: error
+      }, 200).then(() => {
+        setLoading(false);
+        dispatch({ type: ERROR_CLEAR })
+      })
+    }
+  }, [error, successMessage, authenticate])
 
   return (
     <JWTRoot>
@@ -76,7 +117,7 @@ const JwtLogin = () => {
 
           <Grid item sm={12} xs={12}>
             <ContentBox>
-              <h1 style={{ width: '100%', textAlign: 'center' }}>Signin</h1>
+              <h1 style={{ width: '100%', textAlign: 'center' }}>Sign in</h1>
               <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}

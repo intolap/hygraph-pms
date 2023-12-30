@@ -8,6 +8,8 @@ import StatCards from './parts/StatCards';
 import StatCards2 from '../shared/StatCards2';
 import TopSellingTable from './parts/TopSellingTable';
 import UpgradeCard from '../shared/UpgradeCard';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -36,6 +38,9 @@ const H4 = styled('h4')(({ theme }) => ({
 
 const Analytics = () => {
   const { palette } = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state);
 
   return (
     <Fragment>
