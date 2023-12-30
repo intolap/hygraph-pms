@@ -115,10 +115,6 @@ const Layout1Topbar = () => {
     window.location.reload();
   }
 
-  /* if (localStorage.getItem('authToken') == null) {
-    window.location.href = `${CLIENT_URL}`
-  } */
-
   useEffect(() => {
     if (logoutSuccess || logoutError) {
       localStorage.clear();

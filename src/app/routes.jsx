@@ -29,49 +29,48 @@ const Tasks = Loadable(lazy(() => import('app/views/tasks/Tasks')));
 // tasks page
 const TaskDetail = Loadable(lazy(() => import('app/views/task-detail/TaskDetail')));
 
-
 const routes = [
   {
     element: (
-      // <AuthGuard>
-      <MatxLayout />
-      // </AuthGuard>
+      <AuthGuard>
+        <MatxLayout />
+      </AuthGuard>
     ),
     children: [
-      ...materialRoutes,
+      // ...materialRoutes,
       // dashboard route
       {
         path: '/dashboard/',
         element: <Analytics />,
-        auth: authRoles.admin
+        auth: authRoles.super
       },
 
       // projects route
       {
         path: '/projects/',
         element: <Projects />,
-        auth: authRoles.admin
+        auth: authRoles.super
       },
 
       // tasks route
       {
         path: '/tasks/:projectid',
         element: <Tasks />,
-        auth: authRoles.admin
+        auth: authRoles.super
       },
 
       // tasks route
       {
         path: '/task-detail/:taskid',
         element: <TaskDetail />,
-        auth: authRoles.admin
+        auth: authRoles.super
       },
 
       // e-chart rooute
       {
         path: '/charts/echarts',
         element: <AppEchart />,
-        auth: authRoles.editor
+        auth: authRoles.super
       }
     ]
   },

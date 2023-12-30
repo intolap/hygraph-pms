@@ -10,12 +10,12 @@ const App = () => {
 
   return (
     <SettingsProvider>
-      {/* <AuthProvider> */}
-      <MatxTheme>
-        <CssBaseline />
-        {content}
-      </MatxTheme>
-      {/* </AuthProvider> */}
+      <AuthProvider>
+        <MatxTheme>
+          <CssBaseline />
+          {content}
+        </MatxTheme>
+      </AuthProvider>
     </SettingsProvider>
   );
 };

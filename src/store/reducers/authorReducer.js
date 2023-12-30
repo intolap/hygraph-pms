@@ -1,5 +1,14 @@
 import {
-  AUTHOR_LOGIN_ERROR, AUTHOR_LOGIN_SUCCESS, AUTHOR_LOGOUT_FAIL, AUTHOR_LOGOUT_FAIL_CLEAR, AUTHOR_LOGOUT_SUCESS, AUTHOR_LOGOUT_SUCESS_CLEAR, AUTHOR_UPDATE_FAIL, AUTHOR_UPDATE_SUCCESS, ERROR_CLEAR, SUCCESS_MESSAGE_CLEAR
+  AUTHOR_LOGIN_ERROR,
+  AUTHOR_LOGIN_SUCCESS,
+  AUTHOR_LOGOUT_FAIL,
+  AUTHOR_LOGOUT_FAIL_CLEAR,
+  AUTHOR_LOGOUT_SUCESS,
+  AUTHOR_LOGOUT_SUCESS_CLEAR,
+  AUTHOR_UPDATE_FAIL,
+  AUTHOR_UPDATE_SUCCESS,
+  ERROR_CLEAR,
+  SUCCESS_MESSAGE_CLEAR
 } from "../types/authorTypes";
 import { jwtDecode } from 'jwt-decode'
 
@@ -8,19 +17,11 @@ const initialState = {
   error: "",
   successMessage: "",
   authenticate: false,
-  token: '',
-  rtoken: "",
+  token: "",
   myInfo: {},
-  CurUser: {},
-  cAdminData: [],
-  coachData: [],
-  scoutData: [],
-  curSettings: {},
   logoutSuccess: null,
   logoutError: null,
 };
-
-
 
 const tokenDecode = (token) => {
   const tokenDecoded = jwtDecode(token);
@@ -37,8 +38,7 @@ if (getToken && getToken.length > 0) {
 
   if (getInfo) {
     initialState.myInfo = getInfo;
-    initialState.token = getToken
-    initialState.rtoken = getInfo.rtoken ? getInfo.rtoken : ""
+    initialState.token = getToken;
     initialState.authenticate = true;
     initialState.loading = false
   }
@@ -56,7 +56,7 @@ export const AuthorReducer = (state = initialState, action) => {
       token: payload.token,
       myInfo: myInfo,
       authenticate: true,
-      loading: false,
+      // loading: false,
     }
   }
 
