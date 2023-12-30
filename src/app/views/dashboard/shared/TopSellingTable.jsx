@@ -13,6 +13,7 @@ import {
   TableHead,
   TableRow,
   useTheme,
+  Tooltip
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 
@@ -64,11 +65,11 @@ const TopSellingTable = () => {
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
-        <Title>top selling products</Title>
-        <Select size="small" defaultValue="this_month">
+        <Title>Projects</Title>
+        {/* <Select size="small" defaultValue="this_month">
           <MenuItem value="this_month">This Month</MenuItem>
           <MenuItem value="last_month">Last Month</MenuItem>
-        </Select>
+        </Select> */}
       </CardHeader>
 
       <Box overflow="auto">
@@ -76,13 +77,13 @@ const TopSellingTable = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ px: 3 }} colSpan={4}>
-                Name
+                Project Name
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Revenue
+                Start Date
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
-                Stock Status
+                Status
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={1}>
                 Action
@@ -101,25 +102,27 @@ const TopSellingTable = () => {
                 </TableCell>
 
                 <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  ${product.price > 999 ? (product.price / 1000).toFixed(1) + 'k' : product.price}
+                  {product.startDate}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-                  {product.available ? (
-                    product.available < 20 ? (
-                      <Small bgcolor={bgSecondary}>{product.available} available</Small>
+                  {product.status ? (
+                    product.status < 20 ? (
+                      <Small bgcolor={bgSecondary}>off track</Small>
                     ) : (
-                      <Small bgcolor={bgPrimary}>in stock</Small>
+                      <Small bgcolor={bgPrimary}>on track</Small>
                     )
                   ) : (
-                    <Small bgcolor={bgError}>out of stock</Small>
+                    <Small bgcolor={bgError}>on hold</Small>
                   )}
                 </TableCell>
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton>
-                    <Icon color="primary">edit</Icon>
-                  </IconButton>
+                  <Tooltip title="View Tasks" placement="top">
+                    <IconButton>
+                      <Icon color="primary">keyboard_arrow_right</Icon>
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}
@@ -134,32 +137,32 @@ const productList = [
   {
     imgUrl: '/assets/images/products/headphone-2.jpg',
     name: 'earphone',
-    price: 100,
-    available: 15,
+    startDate: "18 january, 2019",
+    status: 15,
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'earphone',
-    price: 1500,
-    available: 30,
+    startDate: "18 january, 2019",
+    status: 30,
   },
   {
     imgUrl: '/assets/images/products/iphone-2.jpg',
     name: 'iPhone x',
-    price: 1900,
-    available: 35,
+    startDate: "18 january, 2019",
+    status: 35,
   },
   {
     imgUrl: '/assets/images/products/iphone-1.jpg',
     name: 'iPhone x',
-    price: 100,
-    available: 0,
+    startDate: "18 january, 2019",
+    status: 0,
   },
   {
     imgUrl: '/assets/images/products/headphone-3.jpg',
     name: 'Head phone',
-    price: 1190,
-    available: 5,
+    startDate: "18 january, 2019",
+    status: 5,
   },
 ];
 

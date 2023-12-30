@@ -18,9 +18,9 @@ const TaskDetail = () => {
         <Breadcrumb routeSegments={[{ name: "Dashboard", path: "/dashboard" }, { name: "Task Detail" }]} />
       </Box>
 
-      <SimpleCard title="Task Detail">
-        <TaskSingle />
-      </SimpleCard>
+      {/* <SimpleCard title="Task Detail"> */}
+      <TaskSingle />
+      {/* </SimpleCard> */}
     </Container>
   );
 };

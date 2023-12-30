@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@mui/material';
 import ReactEcharts from 'echarts-for-react';
 
-const DoughnutChart = ({ height, color = [] }) => {
+const Performance = ({ height, color = [] }) => {
   const theme = useTheme();
 
   const option = {
@@ -81,13 +81,12 @@ const DoughnutChart = ({ height, color = [] }) => {
         data: [
           {
             value: 65,
-            name: 'Google'
+            name: 'Overdue'
           },
           {
             value: 20,
-            name: 'Facebook'
-          },
-          { value: 15, name: 'Others' }
+            name: 'Ontime'
+          }
         ],
         itemStyle: {
           emphasis: {
@@ -111,4 +110,4 @@ const DoughnutChart = ({ height, color = [] }) => {
   );
 };
 
-export default DoughnutChart;
+export default Performance;

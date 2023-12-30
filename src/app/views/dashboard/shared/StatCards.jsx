@@ -29,10 +29,10 @@ const Heading = styled('h6')(({ theme }) => ({
 
 const StatCards = () => {
   const cardList = [
-    { name: 'New Leads', amount: 3050, icon: 'group' },
-    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
+    { name: 'New tasks', number: 10, icon: 'fiber_new', color: '#1976D2' },
+    { name: 'This week tasks', number: 5, icon: 'date_range', color: '#1976D2' },
+    { name: 'Overdue tasks', number: 5, icon: 'access_time', color: '#FF3D57' },
+    { name: 'Due soon tasks', number: 5, icon: 'av_timer', color: '#FFAF38' },
   ];
 
   return (
@@ -41,14 +41,14 @@ const StatCards = () => {
         <Grid item xs={12} md={6} key={index}>
           <StyledCard elevation={6}>
             <ContentBox>
-              <Icon className="icon">{item.icon}</Icon>
+              <Icon className="icon" style={{ color: item.color }}>{item.icon}</Icon>
               <Box ml="12px">
                 <Small>{item.name}</Small>
-                <Heading>{item.amount}</Heading>
+                <Heading>{item.number}</Heading>
               </Box>
             </ContentBox>
 
-            <Tooltip title="View Details" placement="top">
+            <Tooltip title="View Tasks" placement="top">
               <IconButton>
                 <Icon>arrow_right_alt</Icon>
               </IconButton>

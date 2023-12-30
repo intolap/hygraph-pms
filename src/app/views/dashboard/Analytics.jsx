@@ -1,8 +1,9 @@
 import { Card, Grid, styled, useTheme } from '@mui/material';
 import { Fragment } from 'react';
 import Campaigns from './shared/Campaigns';
-import DoughnutChart from './shared/Doughnut';
-import RowCards from './shared/RowCards';
+import Activity from './shared/Activity';
+import Performance from './shared/Performance';
+import RowCards from './tasks/TaskCards';
 import StatCards from './shared/StatCards';
 import StatCards2 from './shared/StatCards2';
 import TopSellingTable from './shared/TopSellingTable';
@@ -43,29 +44,43 @@ const Analytics = () => {
           <Grid item lg={8} md={8} sm={12} xs={12}>
             <StatCards />
             <TopSellingTable />
-            <StatCards2 />
+            {/* <StatCards2 /> */}
 
-            <H4>Ongoing Projects</H4>
-            <RowCards />
+            {/* <H4>Projects Status</H4>
+            <RowCards /> */}
           </Grid>
 
           <Grid item lg={4} md={4} sm={12} xs={12}>
             <Card sx={{ px: 3, py: 2, mb: 3 }}>
-              <Title>Traffic Sources</Title>
+              <Title>Activity</Title>
               <SubTitle>Last 30 days</SubTitle>
+              <br /><br />
+              <SubTitle>(Includes projects worked on and idle time)</SubTitle>
 
-              <DoughnutChart
+              <Activity
                 height="300px"
                 color={[palette.primary.dark, palette.primary.main, palette.primary.light]}
               />
             </Card>
 
-            <UpgradeCard />
-            <Campaigns />
+            <Card sx={{ px: 3, py: 2, mb: 3 }}>
+              <Title>Performance</Title>
+              <SubTitle>Last 30 days</SubTitle>
+              <br /><br />
+              <SubTitle>(Includes tasks)</SubTitle>
+
+              <Performance
+                height="300px"
+                color={[palette.primary.dark, palette.primary.main, palette.primary.light]}
+              />
+            </Card>
+
+            {/* <UpgradeCard /> */}
+            {/* <Campaigns /> */}
           </Grid>
         </Grid>
       </ContentBox>
-    </Fragment>
+    </Fragment >
   );
 };
 
