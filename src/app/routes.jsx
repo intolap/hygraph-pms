@@ -21,13 +21,13 @@ const Analytics = Loadable(lazy(() => import('app/views/dashboard/Analytics')));
 
 
 // projects page
-const Projects = Loadable(lazy(() => import('app/views/dashboard/projects/Projects')));
+const Projects = Loadable(lazy(() => import('app/views/projects/Projects')));
 
 // tasks page
-const Tasks = Loadable(lazy(() => import('app/views/dashboard/tasks/Tasks')));
+const Tasks = Loadable(lazy(() => import('app/views/tasks/Tasks')));
 
 // tasks page
-const TaskDetail = Loadable(lazy(() => import('app/views/dashboard/task-detail/TaskDetail')));
+const TaskDetail = Loadable(lazy(() => import('app/views/task-detail/TaskDetail')));
 
 
 const routes = [
@@ -81,7 +81,7 @@ const routes = [
   { path: '/session/signin', element: <JwtLogin /> },
   // { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
-  { path: '/session/reset-password/', element: <ResetPassword /> },
+  { path: '/session/reset-password/abcd', element: <ResetPassword /> },
 
   { path: '/', element: <Navigate to="dashboard/" /> },
   { path: '*', element: <NotFound /> }

@@ -111,7 +111,7 @@ const Layout1Topbar = () => {
           </StyledIconButton>
 
           <IconBox>
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <Icon>mail_outline</Icon>
             </StyledIconButton>
 
@@ -121,7 +121,7 @@ const Layout1Topbar = () => {
 
             <StyledIconButton>
               <Icon>star_outline</Icon>
-            </StyledIconButton>
+            </StyledIconButton> */}
           </IconBox>
         </Box>
 
@@ -160,10 +160,10 @@ const Layout1Topbar = () => {
               </Link>
             </StyledItem> */}
 
-            <StyledItem>
+            {/* <StyledItem>
               <Icon> settings </Icon>
               <Span> Settings </Span>
-            </StyledItem>
+            </StyledItem> */}
 
             <StyledItem onClick={logout}>
               <Icon> power_settings_new </Icon>

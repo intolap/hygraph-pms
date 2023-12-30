@@ -9,6 +9,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip
 } from "@mui/material";
 import { useState } from "react";
 
@@ -123,9 +124,11 @@ const PaginationTable = () => {
                 <TableCell align="left">{subscriber.date}</TableCell>
                 <TableCell align="left">{subscriber.status}</TableCell>
                 <TableCell align="left">
-                  <IconButton>
-                    <Icon color="">arrow_forward</Icon>
-                  </IconButton>
+                  <Tooltip title="View Tasks" placement="top">
+                    <IconButton>
+                      <Icon color="primary">keyboard_arrow_right</Icon>
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}

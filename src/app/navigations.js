@@ -13,7 +13,7 @@ export const navigations = [
       { name: 'Sign in', iconText: 'SI', path: '/session/signin' },
       // { name: 'Sign up', iconText: 'SU', path: '/session/signup' },
       { name: 'Forgot Password', iconText: 'FP', path: '/session/forgot-password' },
-      { name: 'Reset Password', iconText: 'FP', path: '/session/reset-password/dfghj' },
+      { name: 'Reset Password', iconText: 'FP', path: '/session/reset-password/abcd' },
       { name: 'Error', iconText: '404', path: '/session/404' }
     ]
   },

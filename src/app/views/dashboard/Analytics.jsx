@@ -1,13 +1,13 @@
 import { Card, Grid, styled, useTheme } from '@mui/material';
 import { Fragment } from 'react';
-import Campaigns from './shared/Campaigns';
-import Activity from './shared/Activity';
-import Performance from './shared/Performance';
-import RowCards from './tasks/TaskCards';
-import StatCards from './shared/StatCards';
-import StatCards2 from './shared/StatCards2';
-import TopSellingTable from './shared/TopSellingTable';
-import UpgradeCard from './shared/UpgradeCard';
+import Campaigns from '../shared/Campaigns';
+import Activity from './parts/Activity';
+import Performance from './parts/Performance';
+import RowCards from '../tasks/TaskCards';
+import StatCards from './parts/StatCards';
+import StatCards2 from '../shared/StatCards2';
+import TopSellingTable from './parts/TopSellingTable';
+import UpgradeCard from '../shared/UpgradeCard';
 
 const ContentBox = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -66,8 +66,6 @@ const Analytics = () => {
             <Card sx={{ px: 3, py: 2, mb: 3 }}>
               <Title>Performance</Title>
               <SubTitle>Last 30 days</SubTitle>
-              <br /><br />
-              <SubTitle>(Includes tasks)</SubTitle>
 
               <Performance
                 height="300px"
