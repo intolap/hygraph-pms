@@ -37,7 +37,7 @@ const routes = [
       </AuthGuard>
     ),
     children: [
-      // ...materialRoutes,
+      ...materialRoutes,
       // dashboard route
       {
         path: '/dashboard/',

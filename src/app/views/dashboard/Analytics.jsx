@@ -60,7 +60,7 @@ const Analytics = () => {
               <Title>Activity</Title>
               <SubTitle>Last 30 days</SubTitle>
               <br /><br />
-              <SubTitle>(Includes projects worked on and idle time)</SubTitle>
+              {/* <SubTitle>(Includes projects worked on and idle time)</SubTitle> */}
 
               <Activity
                 height="300px"
@@ -69,7 +69,7 @@ const Analytics = () => {
             </Card>
 
             <Card sx={{ px: 3, py: 2, mb: 3 }}>
-              <Title>Performance</Title>
+              <Title>Task completed</Title>
               <SubTitle>Last 30 days</SubTitle>
 
               <Performance

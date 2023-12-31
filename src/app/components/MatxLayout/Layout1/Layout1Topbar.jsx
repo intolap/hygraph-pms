@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
@@ -9,7 +9,12 @@ import {
   useMediaQuery,
   Box,
   styled,
-  useTheme
+  useTheme,
+  Switch,
+  FormGroup,
+  FormControlLabel,
+  Stack,
+  Typography
 } from '@mui/material';
 
 import { MatxMenu, MatxSearchBox } from 'app/components';
@@ -89,7 +94,7 @@ const Layout1Topbar = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { settings, updateSettings } = useSettings();
-  // const { logout, user } = useAuth();
+  const { logout, user } = useAuth();
   const isMdScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const { error, successMessage, authenticate, token, rtoken, cAdminData, CurUser, myInfo, logoutSuccess, logoutError } = useSelector((state) => state.Authors)
@@ -123,6 +128,58 @@ const Layout1Topbar = () => {
     }
   }, [logoutSuccess, logoutError]);
 
+  const [state, setState] = useState({
+    checkedA: true,
+    checkedB: true,
+  });
+
+  const handleChange = (name) => (event) => {
+    setState({ ...state, [name]: event.target.checked });
+  };
+
+
+  const AntSwitch = styled(Switch)(({ theme }) => ({
+    width: 28,
+    height: 16,
+    padding: 0,
+    display: "flex",
+    "&:active": {
+      "& .MuiSwitch-thumb": {
+        width: 15,
+      },
+      "& .MuiSwitch-switchBase.Mui-checked": {
+        transform: "translateX(9px)",
+      },
+    },
+    "& .MuiSwitch-switchBase": {
+      padding: 2,
+      "&.Mui-checked": {
+        transform: "translateX(12px)",
+        color: "#fff",
+        "& + .MuiSwitch-track": {
+          opacity: 1,
+          backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
+        },
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(["width"], {
+        duration: 200,
+      }),
+    },
+    "& .MuiSwitch-track": {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor: theme.palette.mode === "dark" ? "rgba(255,255,255,.35)" : "rgba(0,0,0,.25)",
+      boxSizing: "border-box",
+    },
+  }));
+
+
   return (
     <TopbarRoot>
       <TopbarContainer>
@@ -146,6 +203,14 @@ const Layout1Topbar = () => {
           </IconBox>
         </Box>
 
+        <Box display="flex">
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>I am free</Typography>
+            <AntSwitch defaultChecked inputProps={{ "aria-label": "ant design" }} />
+            <Typography>I am busy</Typography>
+          </Stack>
+        </Box>
+
         <Box display="flex" alignItems="center">
           {/* <MatxSearchBox /> */}
 
@@ -160,10 +225,10 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    {/* Hi <strong>{user.name}</strong> */}
+                    Hi <strong>{user.name}</strong>
                   </Span>
                 </Hidden>
-                {/* <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} /> */}
+                <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />
               </UserMenu>
             }
           >

@@ -29,8 +29,8 @@ const Heading = styled('h6')(({ theme }) => ({
 
 const StatCards = () => {
   const cardList = [
-    { name: 'New tasks', number: 10, icon: 'fiber_new', color: '#1976D2' },
-    { name: 'This week tasks', number: 5, icon: 'date_range', color: '#1976D2' },
+    { name: 'New tasks', number: 10, icon: 'fiber_new', color: '#125AA1' },
+    { name: 'This week tasks', number: 5, icon: 'date_range', color: '#125AA1' },
     { name: 'Overdue tasks', number: 5, icon: 'access_time', color: '#FF3D57' },
     { name: 'Due soon tasks', number: 5, icon: 'av_timer', color: '#FFAF38' },
   ];
