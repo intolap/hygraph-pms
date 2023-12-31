@@ -16,6 +16,9 @@ import {
   Tooltip
 } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
+import { CLIENT_URL } from 'config/dev';
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -62,6 +65,28 @@ const TopSellingTable = () => {
   const bgPrimary = palette.primary.main;
   const bgSecondary = palette.secondary.main;
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    projectErrorMessage,
+    projectSuccessMessage,
+    projectList
+  } = useSelector((state) => state.Projects);
+  // console.log(projectList)
+  const { myInfo } = useSelector((state) => state.Authors);
+
+  const handleProjectClick = (projectId) => {
+    window.location.href = `${CLIENT_URL}/tasks/${projectId}`;
+  };
+  // console.log(projectList);
+
+  {
+    projectList && projectList.map((project, index) => (
+      console.log(project.projectStatus)
+    ))
+  }
+
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
@@ -92,78 +117,60 @@ const TopSellingTable = () => {
           </TableHead>
 
           <TableBody>
-            {productList.map((product, index) => (
-              <TableRow key={index} hover>
-                <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+            {projectList && projectList.length > 0 ? (
+              projectList.map((project, index) => (
+                <TableRow key={index} hover >
+                  <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+                    <Box display="flex" alignItems="center">
+                      <Avatar src={project.coverImage.url} />
+                      <Paragraph sx={{ m: 0, ml: 4 }}>{project.title}</Paragraph>
+                    </Box>
+                  </TableCell>
+
+                  <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+                    {project.startedOn}
+                  </TableCell>
+
+                  <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
+                    {project.projectStatus === 'OnHold' ? (
+                      <Small bgcolor={bgSecondary}>On Hold</Small>
+                    ) : (
+                      project.projectStatus === 'OnTrack' ? (
+                        <Small bgcolor={bgPrimary}>On Track</Small>
+                      ) : (
+                        project.projectStatus === 'OffTrack' ? (
+                          <Small bgcolor={bgError}>Off Track</Small>
+                        ) : (
+                          <Small bgcolor={bgPrimary}>Complete</Small>
+                        )
+                      )
+                    )}
+                  </TableCell>
+
+                  <TableCell sx={{ px: 0 }} colSpan={1}>
+                    <Tooltip title="View Tasks" placement="top">
+                      <IconButton onClick={() => handleProjectClick(project.id)}>
+                        <Icon color="primary">keyboard_arrow_right</Icon>
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow hover >
+                <TableCell colSpan={9} align="center" sx={{ px: 0 }}>
                   <Box display="flex" alignItems="center">
-                    <Avatar src={product.imgUrl} />
-                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
+                    No projects assigned to you yet.
                   </Box>
                 </TableCell>
-
-                <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
-                  {product.startDate}
-                </TableCell>
-
-                <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
-                  {product.status ? (
-                    product.status < 20 ? (
-                      <Small bgcolor={bgSecondary}>off track</Small>
-                    ) : (
-                      <Small bgcolor={bgPrimary}>on track</Small>
-                    )
-                  ) : (
-                    <Small bgcolor={bgError}>on hold</Small>
-                  )}
-                </TableCell>
-
-                <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <Tooltip title="View Tasks" placement="top">
-                    <IconButton>
-                      <Icon color="primary">keyboard_arrow_right</Icon>
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
               </TableRow>
-            ))}
+            )
+            }
           </TableBody>
         </ProductTable>
       </Box>
-    </Card>
+    </Card >
   );
 };
-
-const productList = [
-  {
-    imgUrl: '/assets/images/products/headphone-2.jpg',
-    name: 'earphone',
-    startDate: "18 january, 2019",
-    status: 15,
-  },
-  {
-    imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'earphone',
-    startDate: "18 january, 2019",
-    status: 30,
-  },
-  {
-    imgUrl: '/assets/images/products/iphone-2.jpg',
-    name: 'iPhone x',
-    startDate: "18 january, 2019",
-    status: 35,
-  },
-  {
-    imgUrl: '/assets/images/products/iphone-1.jpg',
-    name: 'iPhone x',
-    startDate: "18 january, 2019",
-    status: 0,
-  },
-  {
-    imgUrl: '/assets/images/products/headphone-3.jpg',
-    name: 'Head phone',
-    startDate: "18 january, 2019",
-    status: 5,
-  },
-];
 
 export default TopSellingTable;

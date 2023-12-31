@@ -32,6 +32,8 @@ import { CLIENT_URL } from '../../../../config/keys'
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAuthor, LogoutAuthor, ResetPassword, UpdateAuthor } from "../../../../store/actions/authorAction"
 
+import { MD5 } from 'crypto-js';
+
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary
 }));
@@ -228,7 +230,7 @@ const Layout1Topbar = () => {
                     Hi <strong>{user.name}</strong>
                   </Span>
                 </Hidden>
-                <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />
+                <Avatar src={`https://gravatar.com/avatar/${MD5(user.email).toString()}?s=200&d=mp&r=x`} sx={{ cursor: 'pointer' }} />
               </UserMenu>
             }
           >

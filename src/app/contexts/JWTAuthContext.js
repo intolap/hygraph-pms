@@ -32,7 +32,7 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case 'INIT': {
-            console.log(action.payload)
+            // console.log(action.payload)
             const { isAuthenticated, user } = action.payload;
             return { ...state, isAuthenticated, isInitialised: true, user };
         }
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         if (authenticate) {
-            console.log('110')
+            // console.log('110')
             dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: myInfo } });
         } else {
             dispatch({ type: 'INIT', payload: { isAuthenticated: false, user: {} } });
