@@ -32,6 +32,7 @@ const reducer = (state, action) => {
 
     switch (action.type) {
         case 'INIT': {
+            console.log(action.payload)
             const { isAuthenticated, user } = action.payload;
             return { ...state, isAuthenticated, isInitialised: true, user };
         }
@@ -77,7 +78,24 @@ export const AuthProvider = ({ children }) => {
             && window.location.pathname !== "/session/reset-password"
             && window.location.pathname !== "*"
         ) {
-            let userRoutes = [...children?.props?.children[1]?.props?.match?.route?.children]
+            // let userRoutes = [...children?.props?.children[1]?.props?.match?.route?.children]
+
+            let userRoutes = [];
+            if (
+                children
+                && children.props
+                && children.props.children[1]
+                && children.props.children[1].props
+                && children.props.children[1].props.match
+                && children.props.children[1].props.match.route
+                && children.props.children[1].props.match.route.children
+            ) {
+                userRoutes = [...children.props.children[1].props.match.route.children];
+            } else {
+                // Handle the case where one of the properties is not defined or does not have the expected structure.
+                console.error("Error: Unable to retrieve userRoutes. Check the structure of the properties.");
+            }
+
             // console.log(81, children);
             let curUserRoutes = []
             if (userRoutes && userRoutes.length > 0) {
@@ -93,16 +111,14 @@ export const AuthProvider = ({ children }) => {
             }
             // console.log(curUserRoutes)
         }
-    }, [authenticate, myInfo])
 
-    // console.log("87", children?.props?.children[1]?.props?.match?.route?.children)
-    useEffect(() => {
         if (authenticate) {
+            console.log('110')
             dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: myInfo } });
         } else {
             dispatch({ type: 'INIT', payload: { isAuthenticated: false, user: {} } });
         }
-    }, [authenticate, myInfo]);
+    }, [authenticate, myInfo])
 
     // SHOW LOADER
     if (!state.isInitialised) return <MatxLoading />;
