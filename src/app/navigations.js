@@ -2,9 +2,9 @@ export const navigations = [
   { name: 'Dashboard', path: '/dashboard/', icon: 'dashboard' },
   { name: 'Projects', path: '/projects/', icon: 'assignment' },
 
-  { name: 'Tasks', path: '/tasks/:projectid', icon: 'view_list' },
+  /* { name: 'Tasks', path: '/tasks/:projectid', icon: 'view_list' },
 
-  { name: 'Task Detail', path: '/task-detail/:taskid', icon: 'check_circle' },
+  { name: 'Task Detail', path: '/task-detail/:taskid', icon: 'check_circle' }, */
 
   /* {
     name: 'Session/Auth',
@@ -39,15 +39,21 @@ export const navigations = [
       { name: 'Table', path: '/material/table', iconText: 'T' }
     ]
   },
-  {
+  /* {
     name: 'Charts',
     icon: 'trending_up',
     children: [{ name: 'Echarts', path: '/charts/echarts', iconText: 'E' }]
-  },
-  {
+  }, */
+  /* {
     name: 'Documentation',
     icon: 'launch',
     type: 'extLink',
     path: 'http://demos.ui-lib.com/matx-react-doc/'
+  }, */
+  {
+    name: 'Visit Site',
+    icon: 'launch',
+    type: 'extLink',
+    path: 'https://intolap.com/'
   }
 ];

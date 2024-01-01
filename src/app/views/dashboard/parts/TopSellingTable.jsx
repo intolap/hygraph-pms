@@ -76,16 +76,15 @@ const TopSellingTable = () => {
   // console.log(projectList)
   const { myInfo } = useSelector((state) => state.Authors);
 
-  const handleProjectClick = (projectId) => {
+  const handleViewDetails = (projectId) => {
+    window.location.href = `${CLIENT_URL}/project-details/${projectId}`;
+  };
+
+  const handleViewTasks = (projectId) => {
     window.location.href = `${CLIENT_URL}/tasks/${projectId}`;
   };
-  // console.log(projectList);
 
-  {
-    projectList && projectList.map((project, index) => (
-      console.log(project.projectStatus)
-    ))
-  }
+  // console.log(projectList);
 
   return (
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
@@ -102,7 +101,7 @@ const TopSellingTable = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ px: 3 }} colSpan={4}>
-                Project Name
+                Project Title
               </TableCell>
               <TableCell sx={{ px: 0 }} colSpan={2}>
                 Start Date
@@ -110,7 +109,7 @@ const TopSellingTable = () => {
               <TableCell sx={{ px: 0 }} colSpan={2}>
                 Status
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={1}>
+              <TableCell sx={{ px: 0, textAlign: 'center' }} colSpan={1}>
                 Action
               </TableCell>
             </TableRow>
@@ -148,11 +147,19 @@ const TopSellingTable = () => {
                   </TableCell>
 
                   <TableCell sx={{ px: 0 }} colSpan={1}>
-                    <Tooltip title="View Tasks" placement="top">
-                      <IconButton onClick={() => handleProjectClick(project.id)}>
+                    <Tooltip title="View Details" placement="top">
+                      {/* <IconButton onClick={() => handleViewDetails(project.id)}> */}
+                      <IconButton onClick={() => { navigate(`../project-details/${project.id}`) }}>
+
                         <Icon color="primary">keyboard_arrow_right</Icon>
                       </IconButton>
                     </Tooltip>
+
+                    {/* <Tooltip title="View Tasks" placement="top">
+                      <IconButton onClick={() => navigate(`../tasks/${project.id}`)}>
+                        <Icon color="primary">format_list_bulleted</Icon>
+                      </IconButton>
+                    </Tooltip> */}
                   </TableCell>
                 </TableRow>
               ))

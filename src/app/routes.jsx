@@ -22,6 +22,7 @@ const Analytics = Loadable(lazy(() => import('app/views/dashboard/Analytics')));
 
 // projects page
 const Projects = Loadable(lazy(() => import('app/views/projects/Projects')));
+const ProjectDetails = Loadable(lazy(() => import('app/views/project-details/ProjectDetails')));
 
 // tasks page
 const Tasks = Loadable(lazy(() => import('app/views/tasks/Tasks')));
@@ -49,6 +50,12 @@ const routes = [
       {
         path: '/projects/',
         element: <Projects />,
+        auth: authRoles.super
+      },
+
+      {
+        path: '/project-details/:projectid',
+        element: <ProjectDetails />,
         auth: authRoles.super
       },
 

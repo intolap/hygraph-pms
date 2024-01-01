@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import RowCards from './TaskCards';
+import TaskCards from './TaskCards';
 
 const TaskList = () => {
   const [page, setPage] = useState(0);
@@ -29,7 +29,7 @@ const TaskList = () => {
 
   return (
     <Box width="100%" overflow="auto">
-      <RowCards />
+      <TaskCards />
     </Box>
   );
 };

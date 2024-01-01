@@ -48,11 +48,11 @@ const StatCards = () => {
               </Box>
             </ContentBox>
 
-            <Tooltip title="View Tasks" placement="top">
+            {/* <Tooltip title="View Tasks" placement="top">
               <IconButton>
                 <Icon>arrow_right_alt</Icon>
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
           </StyledCard>
         </Grid>
       ))}

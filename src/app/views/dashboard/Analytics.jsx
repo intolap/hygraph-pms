@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Campaigns from '../shared/Campaigns';
 import Activity from './parts/Activity';
 import Performance from './parts/Performance';
-import RowCards from '../tasks/TaskCards';
+import RowCards from '../project-details/TaskCards';
 import StatCards from './parts/StatCards';
 import StatCards2 from '../shared/StatCards2';
 import TopSellingTable from './parts/TopSellingTable';
