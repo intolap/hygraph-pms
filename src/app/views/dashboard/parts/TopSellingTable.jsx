@@ -45,7 +45,7 @@ const ProductTable = styled(Table)(() => ({
     boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
   },
   '& td': { borderBottom: 'none' },
-  '& td:first-of-type': { paddingLeft: '16px !important' },
+  '& td:first-of-type': { paddingLeft: '20px !important' },
 }));
 
 const Small = styled('small')(({ bgcolor }) => ({
@@ -76,14 +76,6 @@ const TopSellingTable = () => {
   // console.log(projectList)
   const { myInfo } = useSelector((state) => state.Authors);
 
-  const handleViewDetails = (projectId) => {
-    window.location.href = `${CLIENT_URL}/project-details/${projectId}`;
-  };
-
-  const handleViewTasks = (projectId) => {
-    window.location.href = `${CLIENT_URL}/tasks/${projectId}`;
-  };
-
   // console.log(projectList);
 
   return (
@@ -100,13 +92,13 @@ const TopSellingTable = () => {
         <ProductTable>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ px: 3 }} colSpan={4}>
+              <TableCell sx={{ px: 3 }} colSpan={6}>
                 Project Title
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
+              <TableCell sx={{ px: 0 }} colSpan={1}>
                 Start Date
               </TableCell>
-              <TableCell sx={{ px: 0 }} colSpan={2}>
+              <TableCell sx={{ px: 0 }} colSpan={1}>
                 Status
               </TableCell>
               <TableCell sx={{ px: 0, textAlign: 'center' }} colSpan={1}>
@@ -119,18 +111,18 @@ const TopSellingTable = () => {
             {projectList && projectList.length > 0 ? (
               projectList.map((project, index) => (
                 <TableRow key={index} hover >
-                  <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
-                    <Box display="flex" alignItems="center">
+                  <TableCell colSpan={6} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
+                    <Box display="flex" alignItems="center" onClick={() => { navigate(`/project-details/${project.id}`) }}>
                       <Avatar src={project.coverImage.url} />
                       <Paragraph sx={{ m: 0, ml: 4 }}>{project.title}</Paragraph>
                     </Box>
                   </TableCell>
 
-                  <TableCell align="left" colSpan={2} sx={{ px: 0, textTransform: 'capitalize' }}>
+                  <TableCell align="left" colSpan={1} sx={{ px: 0, textTransform: 'capitalize' }}>
                     {project.startedOn}
                   </TableCell>
 
-                  <TableCell sx={{ px: 0 }} align="left" colSpan={2}>
+                  <TableCell sx={{ px: 0 }} align="left" colSpan={1}>
                     {project.projectStatus === 'OnHold' ? (
                       <Small bgcolor={bgSecondary}>On Hold</Small>
                     ) : (
@@ -146,19 +138,12 @@ const TopSellingTable = () => {
                     )}
                   </TableCell>
 
-                  <TableCell sx={{ px: 0 }} colSpan={1}>
+                  <TableCell sx={{ px: 0 }} align="center" colSpan={1}>
                     <Tooltip title="View Details" placement="top">
-                      {/* <IconButton onClick={() => handleViewDetails(project.id)}> */}
                       <IconButton onClick={() => { navigate(`/project-details/${project.id}`) }}>
                         <Icon color="primary">keyboard_arrow_right</Icon>
                       </IconButton>
                     </Tooltip>
-
-                    {/* <Tooltip title="View Tasks" placement="top">
-                      <IconButton onClick={() => navigate(`../tasks/${project.id}`)}>
-                        <Icon color="primary">format_list_bulleted</Icon>
-                      </IconButton>
-                    </Tooltip> */}
                   </TableCell>
                 </TableRow>
               ))
