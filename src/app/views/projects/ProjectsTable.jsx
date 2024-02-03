@@ -218,7 +218,7 @@ const PaginationTable = () => {
 
                 <TableCell align="center">
                   <Tooltip title="View Details" placement="top">
-                    <IconButton onClick={() => handleViewDetails(project.id)}>
+                    <IconButton /* onClick={() => handleViewDetails(project.id)} */ onClick={() => { navigate(`/project-details/${project.id}`) }}>
                       <Icon color="primary">keyboard_arrow_right</Icon>
                     </IconButton>
                   </Tooltip>

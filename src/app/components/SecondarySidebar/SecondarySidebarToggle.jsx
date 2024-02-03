@@ -32,11 +32,11 @@ const SecondarySidebarToggle = () => {
         </IconButton>
       )}
 
-      {!settings.secondarySidebar.open && (
+      {/* {!settings.secondarySidebar.open && (
         <Fab color="primary" aria-label="expand" onClick={toggle}>
           <Icon sx={{ color: textColor }}>settings</Icon>
         </Fab>
-      )}
+      )} */}
     </Toggle>
   );
 };

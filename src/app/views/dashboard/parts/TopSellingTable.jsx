@@ -150,7 +150,6 @@ const TopSellingTable = () => {
                     <Tooltip title="View Details" placement="top">
                       {/* <IconButton onClick={() => handleViewDetails(project.id)}> */}
                       <IconButton onClick={() => { navigate(`/project-details/${project.id}`) }}>
-
                         <Icon color="primary">keyboard_arrow_right</Icon>
                       </IconButton>
                     </Tooltip>

@@ -207,9 +207,9 @@ const Layout1Topbar = () => {
 
         <Box display="flex">
           <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>I am free</Typography>
-            <AntSwitch defaultChecked inputProps={{ "aria-label": "ant design" }} />
-            <Typography>I am busy</Typography>
+            <Typography>Available</Typography>
+            <AntSwitch defaultChecked inputProps={{ "aria-label": "ant design" }} onChange={(e) => { console.log(e.target.checked) }} />
+            <Typography>Busy</Typography>
           </Stack>
         </Box>
 
