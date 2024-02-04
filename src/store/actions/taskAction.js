@@ -29,11 +29,11 @@ export const userAuth = (token) => {
     );
 };
 
-export const getTaskById = (data) => {
+export const getTasksByProjectId = (data) => {
     userAuth(token);
-
+    // console.log(data);
     return async (dispatch) => {
-        await axios.post(`${SERVER_URI}/task/get/id`, data)
+        await axios.post(`${SERVER_URI}/task/get/projectid`, data)
             .then((response) => {
                 // console.log(response.data);
                 if (response.data.status) {
@@ -62,42 +62,5 @@ export const getTaskById = (data) => {
                     }
                 })
             });
-    }
-}
-
-export const getTasksByMemberId = (data) => {
-    userAuth(token);
-    // console.log(data)
-    return async (dispatch) => {
-        await axios.post(`${SERVER_URI}/task/get/memberid`, data)
-            .then((response) => {
-                // console.log(response.data);
-                if (response.data.status) {
-                    dispatch({
-                        type: TASK_GET_SUCCESS,
-                        payload: {
-                            message: response.data.message,
-                            data: response.data.tasks
-                        }
-                    })
-                } else {
-                    dispatch({
-                        type: TASK_GET_ERROR,
-                        payload: {
-                            error: response.data.message
-                        }
-                    })
-                }
-            })
-            .catch((error) => {
-                // console.log(error);
-                dispatch({
-                    type: TASK_GET_ERROR,
-                    payload: {
-                        error: error
-                    }
-                })
-            });
-
     }
 }

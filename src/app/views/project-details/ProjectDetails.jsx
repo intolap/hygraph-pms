@@ -6,6 +6,9 @@ import TaskCards from './TaskCards';
 import { CLIENT_URL } from 'config/dev';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+    getTasksByProjectId
+} from "../../../store/actions/taskAction";
 
 const Container = styled("div")(({ theme }) => ({
     margin: "30px",
@@ -58,18 +61,24 @@ const ProjectDetails = () => {
     };
 
     const dispatch = useDispatch();
+
     const navigate = useNavigate();
+
+    const { error, successMessage, authenticate, token, myInfo } = useSelector((state) => state.Authors)
+
     const {
         projectErrorMessage,
         projectSuccessMessage,
         projectList
     } = useSelector((state) => state.Projects);
+
     const { projectid } = useParams();
 
     useEffect(() => {
         if (projectid) {
             const currentProjectObj = projectList.find(project => project.id === projectid);
             setCurrentProject(currentProjectObj);
+            dispatch(getTasksByProjectId({ memberId: myInfo.id, projectId: projectid }))
         }
     }, [projectList, projectid])
 

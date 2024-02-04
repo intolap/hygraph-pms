@@ -17,7 +17,6 @@ const MatxLayout = (props) => {
 
   useEffect(() => {
     dispatch(getProjectsByMemberId({ memberId: myInfo.id }))
-
   }, [myInfo && myInfo.userId && myInfo.userId.length > 0])
 
   return (

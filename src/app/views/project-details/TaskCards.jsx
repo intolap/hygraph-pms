@@ -50,66 +50,89 @@ const TaskCards = () => {
   const textMuted = palette.text.secondary;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { error, successMessage, authenticate, token, myInfo } = useSelector((state) => state.Authors)
 
-  const {
-    taskErrorMessage,
-    taskSuccessMessage,
-    taskList
-  } = useSelector((state) => state.Tasks);
-  console.log(taskList)
-  const { myInfo } = useSelector((state) => state.Authors);
+  const { taskErrorMessage, taskSuccessMessage, taskList } = useSelector((state) => state.Tasks);
+
+  // console.log(taskList);
+
   const [drawerState, setDrawerState] = useState(false);
+  const [drawerData, setDrawerData] = useState(null);
+
   const columns = [
-    // { field: 'id', headerName: 'ID', width: 90 },
     {
       field: 'taskName',
       headerName: 'Task Name',
-      width: 800,
-      editable: true
+      width: 700,
+      editable: false
     },
     {
       field: 'assignee',
       headerName: 'Assignee',
-      width: 150,
-      editable: true,
+      width: 200,
+      editable: false,
       renderCell: (params) => (
-        <Hidden smDown>
-          <Grid item xs={3}>
-            <Box display="flex" position="relative" marginLeft="-0.875rem !important">
-              <StyledAvatar src="/assets/images/face-4.jpg" />
-              <StyledAvatar src="/assets/images/face-4.jpg" />
-              <StyledAvatar sx={{ fontSize: '14px' }}>+3</StyledAvatar>
-            </Box>
-          </Grid>
-        </Hidden>
+        <>
+          {/* {console.log(params.formattedValue)} */}
+          <Hidden smDown>
+            <Grid item xs={3}>
+              <Box display="flex" position="relative" marginLeft="-0.875rem !important">
+                {params && params.formattedValue && params.formattedValue.map((assignee, i) => (
+                  <StyledAvatar key={i} title={assignee.name} src={assignee.picture.url} />
+                ))}
+              </Box>
+            </Grid>
+          </Hidden>
+        </>
       )
     },
     {
       field: 'dueDate',
       headerName: 'Due Date',
       sortable: true,
-      width: 100
+      editable: false,
+      width: 150,
+      renderCell: (params) => (
+        <>
+          {/* console.log(params) */}
+          {params && params.formattedValue && (
+            new Date(params.formattedValue).toLocaleDateString('en-US')
+          )}
+        </>
+      )
     },
     {
       field: 'action',
       headerName: '',
       sortable: false,
+      editable: false,
       width: 50,
       renderCell: (params) => (
-        <Box display="flex" justifyContent="flex-end">
-          <IconButton onClick={() => toggleDrawer(1, true)}>
-            <Icon>keyboard_arrow_right</Icon>
-          </IconButton>
-        </Box>
+        <>
+          {/* console.log(params); */}
+          <Box display="flex" justifyContent="flex-end">
+            <IconButton onClick={() => toggleDrawer(params.row.id, true)}>
+              <Icon>keyboard_arrow_right</Icon>
+            </IconButton>
+          </Box>
+        </>
       )
     }
   ];
 
-  const rows = [
-    { id: 1, taskName: 'Snow', assignee: 'Jon', dueDate: 14, action: 14 }
-  ];
+  const rows = [];
+
+  taskList.map(task => {
+    rows.push({ id: task.id, taskName: task.taskName, taskStatus: task.taskStatus, assignee: task.authorsPerTask, dueDate: task.dueDate, action: task.id });
+  })
 
   const toggleDrawer = (taskId, open) => {
+    if (taskId) {
+      const currentTask = taskList.find(task => task.id === taskId);
+      setDrawerData(currentTask);
+    } else {
+      setDrawerData(null);
+    }
     setDrawerState(open);
   };
 
@@ -136,38 +159,47 @@ const TaskCards = () => {
         onClose={() => toggleDrawer(null, false)}
       >
         <Box sx={{ height: '100vh', width: 800 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'space-around' }}>
-            <IconButton aria-label="close drawer" color="error">
-              <Icon>last_page</Icon>
-            </IconButton>
-            <IconButton aria-label="link" color="primary">
-              <Icon>link</Icon>
-            </IconButton>
-            <IconButton aria-label="done all" color="success">
-              <Icon>done_all</Icon>
-            </IconButton>
+          {drawerData ?
+            <>
+              <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'space-around' }}>
+                <IconButton aria-label="close drawer" color="error" onClick={() => { toggleDrawer(null, false) }}>
+                  <Icon>last_page</Icon>
+                </IconButton>
+                <IconButton aria-label="link" color="primary">
+                  <Icon>link</Icon>
+                </IconButton>
+                <IconButton aria-label="done all" color="success">
+                  <Icon>done_all</Icon>
+                </IconButton>
+              </Box>
 
-          </Box>
-          <Box sx={{ padding: '20px' }}>
-            <h2>Task name</h2>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <h4>Assignee: </h4>
-              <Hidden smDown>
-                <Grid item xs={3}>
-                  <Box display="flex" position="relative" marginLeft="0.5rem !important">
-                    <StyledAvatar src="/assets/images/face-4.jpg" />
-                    <StyledAvatar src="/assets/images/face-4.jpg" />
-                    <StyledAvatar sx={{ fontSize: '14px' }}>+3</StyledAvatar>
-                  </Box>
-                </Grid>
-              </Hidden>
-            </Box>
+              <Box sx={{ padding: '20px' }}>
+                <h2>{drawerData.taskName}</h2>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                  <h4>Assignee: </h4>
+                  <Hidden smDown>
+                    <Grid item xs={3}>
+                      <Box display="flex" position="relative" marginLeft="-0.875rem !important">
+                        {drawerData && drawerData.authorsPerTask && drawerData.authorsPerTask.map((assignee, i) => (
+                          <StyledAvatar key={i} title={assignee.name} src={assignee.picture.url} />
+                        ))}
+                      </Box>
+                    </Grid>
+                  </Hidden>
+                </Box>
 
-            <h4>Due date: <small>12/12/2023</small></h4>
-            <h4>Project: <small>Project name</small></h4>
-            <h4>Description:</h4>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </Box>
+                <h4>Due date: <small>{drawerData.dueDate}</small></h4>
+                <h4>Description:</h4>
+                <Box dangerouslySetInnerHTML={{ __html: drawerData.taskDescription.html }}></Box>
+              </Box>
+            </>
+            :
+            <>
+              <Box sx={{ padding: '20px' }}>
+                <h2>Invalid task</h2>
+              </Box>
+            </>
+          }
         </Box>
       </Drawer >
     </Box >

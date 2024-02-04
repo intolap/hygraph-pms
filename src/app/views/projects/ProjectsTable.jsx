@@ -196,7 +196,6 @@ const PaginationTable = () => {
                     )
                   )}
                 </TableCell>
-
                 <TableCell align="left">
                   <Hidden smDown>
                     <Grid item xs={3}>
@@ -218,16 +217,10 @@ const PaginationTable = () => {
 
                 <TableCell align="center">
                   <Tooltip title="View Details" placement="top">
-                    <IconButton /* onClick={() => handleViewDetails(project.id)} */ onClick={() => { navigate(`/project-details/${project.id}`) }}>
+                    <IconButton onClick={() => { navigate(`/project-details/${project.id}`) }}>
                       <Icon color="primary">keyboard_arrow_right</Icon>
                     </IconButton>
                   </Tooltip>
-
-                  {/* <Tooltip title="View Tasks" placement="top">
-                    <IconButton onClick={() => handleViewTasks(project.id)}>
-                      <Icon color="primary">format_list_bulleted</Icon>
-                    </IconButton>
-                  </Tooltip> */}
                 </TableCell>
               </TableRow>
             ))
